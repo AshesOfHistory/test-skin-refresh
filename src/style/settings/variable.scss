@@ -1,0 +1,27 @@
+// 定义从白到黑的色彩渐变，主要用来展示不同级别的常规文案字体颜色。
+$white: #fff !default;
+$gray-300: #dee2e6 !default;
+$gray-600: #6c757d !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+// 定义一套状态颜色，主要用来展示比如成功失败等各种状态
+$primary: #0d6efd !default;
+$success: #52c41a !default;
+$info: #17a2b8 !default;
+$warning: #fadb14 !default;
+$danger: #dc3545 !default;
+
+// 字体大小 浏览器默认16px
+$font-size-base: 1rem !default;
+$font-size-lg: $font-size-base * 1.25 !default;
+$font-size-sm: $font-size-base * 0.875 !default;
+
+// 字重
+$font-weight-normal: 400 !default;
+$font-weight-bold: 600 !default;
+
+// 行高
+$line-height-base: 1.5 !default;
+$line-height-lg: 2 !default;
+$line-height-sm: 1.25 !default;

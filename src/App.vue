@@ -1,12 +1,32 @@
+<!--
+ * @Author: 沧澜
+ * @Date: 2021-12-20 04:34:46
+ * @LastEditors: 沧澜
+ * @LastEditTime: 2021-12-20 05:39:56
+ * @Description: 
+-->
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <van-tabbar route v-model="active">
+      <van-tabbar-item replace to="/home" icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item replace to="/list" icon="orders-o">列表</van-tabbar-item>
+      <van-tabbar-item replace to="/mine" icon="setting-o"
+        >我的</van-tabbar-item
+      >
+    </van-tabbar>
+    <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      active: 0,
+    };
+  },
+};
+</script>
 
 <style>
 #app {
@@ -15,18 +35,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
