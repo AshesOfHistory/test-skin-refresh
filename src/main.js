@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-20 05:24:27
+ * @LastEditTime: 2021-12-20 05:44:24
  * @Description:
  */
 /*
@@ -16,12 +16,15 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { Tabbar, TabbarItem } from "vant";
+import { Tabbar, TabbarItem, Picker, Popup, Field } from "vant";
 import "vant/lib/index.css";
 
 Vue.config.productionTip = false;
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
+Vue.use(Picker);
+Vue.use(Popup);
+Vue.use(Field);
 
 new Vue({
   router,

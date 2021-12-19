@@ -1,6 +1,12 @@
 <template>
   <div class="List">
-    <input class="c-list-input" type="text" placeholder="这里是列表页输入框" />
+    <div class="container" v-for="(item, index) in 10" :key="index">
+      <div class="c-list-title">标题</div>
+      <div class="c-list-sub-title">副标题</div>
+      <div class="c-list-info">
+        这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,3 +21,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.List {
+  padding: 10px;
+  padding-bottom: 50px;
+  .c-list-title {
+    text-align: left;
+  }
+}
+</style>

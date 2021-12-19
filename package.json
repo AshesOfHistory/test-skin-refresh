@@ -20,9 +20,8 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-plugin-import": "^1.13.3",
-    "node-sass": "^7.0.0",
     "sass": "^1.45.0",
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^10.1.0",
     "vue-template-compiler": "^2.6.11"
   }
 }
