@@ -5,3 +5,49 @@
 @import "./old/index.scss";
 @import "./warm/index.scss";
 @import "./young/index.scss";
+
+$themes: (
+  default: $theme-default,
+  old: $theme-old,
+  young: $theme-young,
+  warm: $theme-warm,
+  cold: $theme-cold,
+);
+
+@mixin themable {
+  @each $section, $map in $themes {
+    $map: $map !global;
+    [data-theme="#{$section}"] & {
+      @content;
+    }
+  }
+}
+
+@function themed($key, $color) {
+  @return map-get(map-get($map, $key), $color);
+}
+
+@mixin t-list-title($style) {
+  // themed() 被循环调用，每次循环其 $map 值不一样
+  @include themable {
+    #{$style}: themed("t-list-title", "color");
+    #{$style}: themed("t-list-title", "font-weight");
+    #{$style}: themed("t-list-title", "font-size");
+  }
+}
+@mixin t-list-sub-title($style) {
+  // themed() 被循环调用，每次循环其 $map 值不一样
+  @include themable {
+    #{$style}: themed("t-list-sub-title", "color");
+    #{$style}: themed("t-list-sub-title", "font-weight");
+    #{$style}: themed("t-list-sub-title", "font-size");
+  }
+}
+@mixin t-list-info($style) {
+  // themed() 被循环调用，每次循环其 $map 值不一样
+  @include themable {
+    #{$style}: themed("t-list-info", "color");
+    #{$style}: themed("t-list-info", "font-weight");
+    #{$style}: themed("t-list-info", "font-size");
+  }
+}

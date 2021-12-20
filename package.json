@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "postcss-plugin-px2rem": "^0.8.1",
     "vant-ui": "^2.1.11",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div>这里是首页</div>
     <input class="c-home-input" type="text" placeholder="这里是首页输入框" />
   </div>
 </template>

@@ -13,15 +13,63 @@ $warning: #fadb14 !default;
 $danger: #dc3545 !default;
 
 // 字体大小 浏览器默认16px
-$font-size-base: 1rem !default;
+$font-size-base: 16px !default;
+$font-size: 16px !default;
 $font-size-lg: $font-size-base * 1.25 !default;
 $font-size-sm: $font-size-base * 0.875 !default;
 
 // 字重
 $font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
 $font-weight-bold: 600 !default;
 
 // 行高
 $line-height-base: 1.5 !default;
 $line-height-lg: 2 !default;
 $line-height-sm: 1.25 !default;
+
+//浅色主题
+$light-theme: (
+  base-color: #000,
+  background-color: #ccc,
+);
+
+//深色主题
+$dark-theme: (
+  base-color: #fff,
+  background-color: #000,
+);
+
+//定义映射集合
+$themes: (
+  light-theme: $light-theme,
+  dark-theme: $dark-theme,
+);
+
+//获取颜色并为当前主题色配置颜色
+//字体颜色
+@mixin base-color() {
+  @each $theme-name, $theme in $themes {
+    [data-theme="#{$theme-name}"] & {
+      color: map-get($map: $theme, $key: base-color);
+    }
+  }
+}
+
+// 获取背景色下的变量颜色值
+@function get-color-variable($variable-name) {
+  @return map-get($theme, $variable-name);
+}
+
+// 给当前主题色配置颜色变量
+@mixin set-theme {
+  @each $theme-name, $theme in $themes {
+    // !global 把局部变量强升为全局变量
+    // 供get-color-variable函数中：map-get里 key 的使用
+    $theme: $theme !global;
+
+    [data-theme="#{$theme-name}"] & {
+      @content;
+    }
+  }
+}

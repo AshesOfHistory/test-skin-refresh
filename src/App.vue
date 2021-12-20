@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-20 05:39:56
+ * @LastEditTime: 2021-12-20 07:31:27
  * @Description: 
 -->
 <template>
@@ -14,7 +14,7 @@
         >我的</van-tabbar-item
       >
     </van-tabbar>
-    <router-view />
+    <router-view data-theme="light-theme" />
   </div>
 </template>
 
@@ -28,12 +28,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  height: 100%;
+  font-size: $font-size;
+  @include set-theme {
+    color: get-color-variable("base-color");
+    background: get-color-variable("background-color");
+  }
 }
 </style>
