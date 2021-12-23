@@ -2,21 +2,43 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 15:09:11
+ * @LastEditTime: 2021-12-23 16:11:50
  * @Description: 
 -->
 <template>
-  <div class="List">
-    <div class="container" v-for="(item, index) in 10" :key="index">
+  <div
+    :class="{
+      'theme-default': value === '默认',
+      'theme-old': value === '老人',
+      'theme-young': value === '年轻',
+      'theme-warm': value === '温暖',
+      'theme-cold': value === '寒冷',
+    }"
+    class="List"
+  >
+    <van-field
+      readonly
+      clickable
+      name="picker"
+      :value="value"
+      label="主题"
+      placeholder="点击选择主题"
+      @click="showPicker = true"
+    />
+    <van-popup v-model="showPicker" position="bottom">
+      <van-picker
+        show-toolbar
+        :columns="columns"
+        @confirm="onConfirm"
+        @cancel="showPicker = false"
+      />
+    </van-popup>
+    <div class="container" v-for="(item, index) in 3" :key="index">
       <div class="t-list-title">标题</div>
       <div class="t-list-sub-title">副标题</div>
       <div class="t-list-info">
         这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息
       </div>
-    </div>
-
-    <div class="theme-red">
-      <div class="box">这里是主题内容展示区</div>
     </div>
   </div>
 </template>
@@ -28,11 +50,21 @@ export default {
   name: "List",
   components: {},
   data() {
-    return {};
+    return {
+      value: "默认",
+      columns: ["默认", "老人", "年轻", "温暖", "寒冷"],
+      showPicker: false,
+    };
+  },
+  methods: {
+    onConfirm(value) {
+      this.value = value;
+      this.showPicker = false;
+    },
   },
   mounted() {
     // 用js模拟scss所做的事情
-    const black = "black";
+    const black = "#333";
     const red = "red";
     const blue = "blue";
 
@@ -63,9 +95,9 @@ export default {
       return map.get(key);
     };
 
-    const forMapSet = (map, obj) => {
+    // 模拟插槽的合并添加作用
+    const mockContent = (map, obj) => {
       for (let key in obj) {
-        console.log("key", obj[key]);
         map.set(key, obj[key]);
       }
       return map;
@@ -80,7 +112,6 @@ export default {
     };
 
     const CurrentTheme = "black";
-    // 调用全局主题公共变量指定的值
 
     // 封装切换主题函数
     // @content   ->  slot  额外传入变量
@@ -90,24 +121,25 @@ export default {
         // 缓存当前主题下的各个样式
         let themeMap = new Map();
 
+        // 获取当前主题下指定属性的值
         const themed = (attr) => {
           return mapGet(themeMap, attr);
         };
-        for (let key in map) {
+        for (let attr in map) {
           const currentMap = new Map();
-          currentMap.set(key, map[key]);
+          currentMap.set(attr, map[attr]);
           themeMap = mapMerge(themeMap, currentMap);
         }
         totalThemeMap.set(`.theme-${themeName}`, themeMap);
         if (callback) {
           const contentObj = callback(themed);
-          const contentMap = forMapSet(themeMap, contentObj);
+          const contentMap = mockContent(themeMap, contentObj);
           themeMap = mapMerge(themeMap, contentMap);
         }
         totalThemeMap.set(`.theme-${themeName}`, themeMap);
-        console.log(themeMap, totalThemeMap);
       }
       console.log("当前生效主题", totalThemeMap.get(`.theme-${CurrentTheme}`));
+      console.log("总览主题", totalThemeMap);
     }
 
     themify((themed) => {
@@ -138,71 +170,85 @@ export default {
       color: $gray-300;
     }
   }
+}
 
-  $black: black;
-  $red: red;
-  $green: green;
-  $blue: blue;
-  $orange: orange;
-  $purple: purple;
+$black: #333;
+$red: red;
+$green: green;
+$blue: blue;
+$orange: orange;
+$purple: purple;
 
-  $themes-color: (
-    black: (
-      color: $black,
-      background: $black,
-      border: 1px solid $black,
-    ),
-    red: (
-      color: $red,
-      background: $red,
-      border: 1px solid $red,
-    ),
-    green: (
-      color: $green,
-      background: $green,
-      border: 1px solid $green,
-    ),
-    blue: (
-      color: $blue,
-      background: $blue,
-      border: 1px solid $blue,
-    ),
-    orange: (
-      color: $orange,
-      background: $orange,
-      border: 1px solid $orange,
-    ),
-    purple: (
-      color: $purple,
-      background: $purple,
-      border: 1px solid $purple,
-    ),
-  );
+// 不同主题的对应mixin
+@mixin t-list-title-default {
+  color: $info;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+}
 
-  $theme-map: ();
-  @mixin zhuti() {
-    @each $theme-name, $map in $themes-color {
-      @debug $theme-name, $map;
-      #{".theme-" + $theme-name} & {
-        @each $key, $value in $map {
-          $theme-map: map-merge(
-            $theme-map,
-            (
-              $key: $value,
-            )
-          ) !global;
-        }
-        @content;
+@mixin t-list-title-old {
+  color: $success;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-slg;
+}
+
+$themes-color: (
+  default: (
+    // 全局样式属性
+    color: $black,
+    background: $black,
+    border: 1px solid $black,
+  ),
+  old: (
+    color: $black,
+    background: $red,
+    border: 1px solid $red,
+  ),
+  young: (
+    color: $green,
+    background: $green,
+    border: 1px solid $green,
+  ),
+  warm: (
+    color: $blue,
+    background: $blue,
+    border: 1px solid $blue,
+  ),
+  cold: (
+    color: $blue,
+    background: $blue,
+    border: 1px solid $blue,
+  ),
+);
+
+// 第三步: 定义混合指令, 切换主题,并将主题中的所有规则添加到theme-map中
+@mixin themify() {
+  @each $theme-name, $map in $themes-color {
+    // & 表示父级元素  !global 表示覆盖原来的
+    .theme-#{$theme-name} & {
+      $theme-map: () !global;
+      // 循环合并键值对
+      @each $key, $value in $map {
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
       }
+      // 表示包含 下面函数 themed()
+      @content;
     }
   }
-  @function themed($key) {
-    @return map-get($theme-map, $key);
-  }
-  .box {
-    @include zhuti() {
-      color: themed("color");
-    }
+}
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+.box {
+  @include themify() {
+    color: themed("color");
+    background: themed("background");
+    border: themed("border");
   }
 }
 </style>
