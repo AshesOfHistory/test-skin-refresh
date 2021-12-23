@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 21:48:17
+ * @LastEditTime: 2021-12-23 21:54:23
  * @Description: 
 -->
 <template>
@@ -230,12 +230,14 @@ $themes-color: (
   ),
 );
 
+$theme-map: null;
+
 // 第三步: 定义混合指令, 切换主题,并将主题中的所有规则添加到theme-map中
 @mixin themify() {
   @each $theme-name, $map in $themes-color {
     // & 表示父级元素  !global 表示覆盖原来的
     [data-theme="#{$theme-name}"] & {
-      $theme-map: () !global;
+      $theme-map: ();
       // 循环合并键值对
       @each $key, $value in $map {
         $theme-map: map-merge(
@@ -250,6 +252,7 @@ $themes-color: (
     }
   }
 }
+
 @function themed($key) {
   @return map-get($theme-map, $key);
 }

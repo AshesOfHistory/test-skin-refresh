@@ -2,14 +2,14 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 05:59:05
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 21:34:45
+ * @LastEditTime: 2021-12-23 21:52:35
  * @Description:
  */
 
 const fs = require("fs");
 const webpack = require("webpack");
 
-// const themeFiles = fs.readFileSync("");
+// 获取主题文件名
 const themeFiles = fs.readdirSync("./src/style/theme");
 let ThemesArr = [];
 themeFiles.forEach(function (item, index) {
