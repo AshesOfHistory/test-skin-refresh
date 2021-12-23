@@ -3,17 +3,17 @@
 $theme-old: (
   t-list-title: (
     color: $gray-900,
-    font-weight: $font-weight-bold,
-    font-size: $font-size-lg,
+    font-weight: $font-weight-super-bold,
+    font-size: $font-size-slg,
   ),
   t-list-sub-title: (
     color: $gray-600,
-    font-weight: $font-weight-medium,
-    font-size: $font-size-base,
+    font-weight: $font-weight-bold,
+    font-size: $font-size-lg,
   ),
   t-list-info: (
     color: $gray-300,
-    font-weight: $font-weight-normal,
+    font-weight: $font-weight-medium,
     font-size: $font-size-base,
   ),
 );

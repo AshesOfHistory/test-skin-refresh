@@ -1,17 +1,17 @@
 @import "../../settings/variable.scss";
 $theme-cold: (
   t-list-title: (
-    color: $gray-900,
+    color: $info,
     font-weight: $font-weight-bold,
     font-size: $font-size-lg,
   ),
   t-list-sub-title: (
-    color: $gray-600,
+    color: $info,
     font-weight: $font-weight-medium,
     font-size: $font-size-base,
   ),
   t-list-info: (
-    color: $gray-300,
+    color: $info,
     font-weight: $font-weight-normal,
     font-size: $font-size-base,
   ),

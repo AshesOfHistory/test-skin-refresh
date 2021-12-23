@@ -16,12 +16,14 @@ $danger: #dc3545 !default;
 $font-size-base: 16px !default;
 $font-size: 16px !default;
 $font-size-lg: $font-size-base * 1.25 !default;
+$font-size-slg: $font-size-base * 1.75 !default;
 $font-size-sm: $font-size-base * 0.875 !default;
 
 // 字重
 $font-weight-normal: 400 !default;
 $font-weight-medium: 500 !default;
 $font-weight-bold: 600 !default;
+$font-weight-super-bold: 700 !default;
 
 // 行高
 $line-height-base: 1.5 !default;
