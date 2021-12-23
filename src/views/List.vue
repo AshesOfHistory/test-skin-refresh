@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 20:12:36
+ * @LastEditTime: 2021-12-23 20:20:15
  * @Description: 
 -->
 <template>
@@ -11,7 +11,7 @@
       readonly
       clickable
       name="picker"
-      :value="value"
+      :value="currentTheme"
       label="主题"
       placeholder="点击选择主题"
       @click="showPicker = true"
@@ -42,17 +42,19 @@ export default {
   components: {},
   data() {
     return {
-      value: "默认",
+      currentTheme: "默认",
       themeCName: ["默认", "老人", "年轻", "温暖", "寒冷"],
       themeValue: ["default", "old", "young", "warm", "cold"],
       showPicker: false,
     };
   },
   methods: {
-    onConfirm(value) {
-      this.value = value;
+    onConfirm(currentTheme) {
+      this.currentTheme = currentTheme;
       this.showPicker = false;
-      const findIndex = this.themeCName.findIndex((item) => item === value);
+      const findIndex = this.themeCName.findIndex(
+        (theme) => theme === currentTheme
+      );
       console.log(`theme-${this.themeValue[findIndex]}`);
       document
         .getElementsByTagName("body")[0]
