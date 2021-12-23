@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 20:20:15
+ * @LastEditTime: 2021-12-23 20:39:22
  * @Description: 
 -->
 <template>
@@ -24,6 +24,16 @@
         @cancel="showPicker = false"
       />
     </van-popup>
+    <!-- https://sitecdn.zcycdn.com/f2e-assets/dc43b39d-4e2e-455e-9a68-ad19ef3da8b8.png?x-oss-process=image/quality,Q_75/format,png -->
+    <!-- :column-num="3" -->
+    <van-grid :column-num="columnNum[currentThemeIndex]">
+      <van-grid-item
+        v-for="value in gridNum[currentThemeIndex]"
+        :key="value"
+        icon="photo-o"
+        text="文字"
+      />
+    </van-grid>
     <div class="container" v-for="(item, index) in 3" :key="index">
       <div class="t-list-title">标题</div>
       <div class="t-list-sub-title">副标题</div>
@@ -43,8 +53,12 @@ export default {
   data() {
     return {
       currentTheme: "默认",
+      currentThemeIndex: 0,
       themeCName: ["默认", "老人", "年轻", "温暖", "寒冷"],
       themeValue: ["default", "old", "young", "warm", "cold"],
+      themeIcon: ["location-o", "like-o", "star-o", "phone-o"],
+      gridNum: [8, 4, 8, 8, 6],
+      columnNum: [4, 2, 3, 4, 3],
       showPicker: false,
     };
   },
@@ -52,13 +66,16 @@ export default {
     onConfirm(currentTheme) {
       this.currentTheme = currentTheme;
       this.showPicker = false;
-      const findIndex = this.themeCName.findIndex(
+      this.currentThemeIndex = this.themeCName.findIndex(
         (theme) => theme === currentTheme
       );
-      console.log(`theme-${this.themeValue[findIndex]}`);
+      console.log(`theme-${this.themeValue[this.currentThemeIndex]}`);
       document
         .getElementsByTagName("body")[0]
-        .setAttribute("data-theme", `theme-${this.themeValue[findIndex]}`);
+        .setAttribute(
+          "data-theme",
+          `theme-${this.themeValue[this.currentThemeIndex]}`
+        );
     },
   },
   mounted() {
