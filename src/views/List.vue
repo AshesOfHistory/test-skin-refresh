@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 20:39:22
+ * @LastEditTime: 2021-12-23 20:42:39
  * @Description: 
 -->
 <template>
@@ -30,7 +30,7 @@
       <van-grid-item
         v-for="value in gridNum[currentThemeIndex]"
         :key="value"
-        icon="photo-o"
+        :icon="gridIcon[currentThemeIndex]"
         text="文字"
       />
     </van-grid>
@@ -56,7 +56,7 @@ export default {
       currentThemeIndex: 0,
       themeCName: ["默认", "老人", "年轻", "温暖", "寒冷"],
       themeValue: ["default", "old", "young", "warm", "cold"],
-      themeIcon: ["location-o", "like-o", "star-o", "phone-o"],
+      gridIcon: ["location-o", "like-o", "star-o", "phone-o", "fire-o"],
       gridNum: [8, 4, 8, 8, 6],
       columnNum: [4, 2, 3, 4, 3],
       showPicker: false,
