@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-20 07:31:27
+ * @LastEditTime: 2021-12-23 20:01:42
  * @Description: 
 -->
 <template>
@@ -24,6 +24,11 @@ export default {
     return {
       active: 0,
     };
+  },
+  mounted() {
+    document
+      .getElementsByTagName("body")[0]
+      .setAttribute("data-theme", "theme-default");
   },
 };
 </script>

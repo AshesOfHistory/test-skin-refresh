@@ -2,20 +2,11 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 19:26:59
+ * @LastEditTime: 2021-12-23 20:12:36
  * @Description: 
 -->
 <template>
-  <div
-    :class="{
-      'theme-default': value === '默认',
-      'theme-old': value === '老人',
-      'theme-young': value === '年轻',
-      'theme-warm': value === '温暖',
-      'theme-cold': value === '寒冷',
-    }"
-    class="List"
-  >
+  <div class="List">
     <van-field
       readonly
       clickable
@@ -28,7 +19,7 @@
     <van-popup v-model="showPicker" position="bottom">
       <van-picker
         show-toolbar
-        :columns="columns"
+        :columns="themeCName"
         @confirm="onConfirm"
         @cancel="showPicker = false"
       />
@@ -52,7 +43,8 @@ export default {
   data() {
     return {
       value: "默认",
-      columns: ["默认", "老人", "年轻", "温暖", "寒冷"],
+      themeCName: ["默认", "老人", "年轻", "温暖", "寒冷"],
+      themeValue: ["default", "old", "young", "warm", "cold"],
       showPicker: false,
     };
   },
@@ -60,6 +52,11 @@ export default {
     onConfirm(value) {
       this.value = value;
       this.showPicker = false;
+      const findIndex = this.themeCName.findIndex((item) => item === value);
+      console.log(`theme-${this.themeValue[findIndex]}`);
+      document
+        .getElementsByTagName("body")[0]
+        .setAttribute("data-theme", `theme-${this.themeValue[findIndex]}`);
     },
   },
   mounted() {
@@ -225,7 +222,7 @@ $themes-color: (
 @mixin themify() {
   @each $theme-name, $map in $themes-color {
     // & 表示父级元素  !global 表示覆盖原来的
-    .theme-#{$theme-name} & {
+    [data-theme="theme-#{$theme-name}"] & {
       $theme-map: () !global;
       // 循环合并键值对
       @each $key, $value in $map {

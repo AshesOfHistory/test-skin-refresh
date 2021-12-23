@@ -15,9 +15,9 @@ $themes: (
 );
 
 @mixin themable {
-  @each $section, $map in $themes {
+  @each $section-theme, $map in $themes {
     $map: $map !global;
-    [data-theme="#{$section}"] & {
+    [data-theme="#{$section-theme}"] & {
       @content;
     }
   }
