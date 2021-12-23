@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 16:11:50
+ * @LastEditTime: 2021-12-23 19:26:59
  * @Description: 
 -->
 <template>
@@ -154,21 +154,21 @@ export default {
   padding: 10px;
   padding-bottom: 50px;
   .container {
-    .t-list-title {
-      font-size: $font-size-lg;
-      font-weight: 600;
-      color: $gray-900;
-    }
-    .t-list-sub-title {
-      font-size: $font-size-base;
-      font-weight: 500;
-      color: $gray-600;
-    }
-    .t-list-info {
-      font-size: $font-size-sm;
-      font-weight: 400;
-      color: $gray-300;
-    }
+    // .t-list-title {
+    //   font-size: $font-size-lg;
+    //   font-weight: 600;
+    //   color: $gray-900;
+    // }
+    // .t-list-sub-title {
+    //   font-size: $font-size-base;
+    //   font-weight: 500;
+    //   color: $gray-600;
+    // }
+    // .t-list-info {
+    //   font-size: $font-size-sm;
+    //   font-weight: 400;
+    //   color: $gray-300;
+    // }
   }
 }
 
@@ -195,29 +195,29 @@ $purple: purple;
 $themes-color: (
   default: (
     // 全局样式属性
-    color: $black,
-    background: $black,
-    border: 1px solid $black,
+    color: $info,
+    font-weight: $font-weight-bold,
+    font-size: $font-size-lg,
   ),
   old: (
-    color: $black,
-    background: $red,
-    border: 1px solid $red,
+    color: $danger,
+    font-weight: $font-weight-bold,
+    font-size: $font-size-slg,
   ),
   young: (
     color: $green,
-    background: $green,
-    border: 1px solid $green,
+    font-weight: $font-weight-bold,
+    font-size: $font-size-lg,
   ),
   warm: (
-    color: $blue,
-    background: $blue,
-    border: 1px solid $blue,
+    color: $orange,
+    font-weight: $font-weight-bold,
+    font-size: $font-size-lg,
   ),
   cold: (
     color: $blue,
-    background: $blue,
-    border: 1px solid $blue,
+    font-weight: $font-weight-bold,
+    font-size: $font-size-lg,
   ),
 );
 
@@ -244,11 +244,13 @@ $themes-color: (
 @function themed($key) {
   @return map-get($theme-map, $key);
 }
-.box {
+.t-list-title,
+.t-list-sub-title,
+.t-list-info {
   @include themify() {
     color: themed("color");
-    background: themed("background");
-    border: themed("border");
+    font-weight: themed("font-weight");
+    font-size: themed("font-size");
   }
 }
 </style>
