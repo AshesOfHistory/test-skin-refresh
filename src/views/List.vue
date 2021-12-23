@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 21:54:23
+ * @LastEditTime: 2021-12-23 21:59:07
  * @Description: 
 -->
 <template>
@@ -237,7 +237,7 @@ $theme-map: null;
   @each $theme-name, $map in $themes-color {
     // & 表示父级元素  !global 表示覆盖原来的
     [data-theme="#{$theme-name}"] & {
-      $theme-map: ();
+      $theme-map: () !global;
       // 循环合并键值对
       @each $key, $value in $map {
         $theme-map: map-merge(
