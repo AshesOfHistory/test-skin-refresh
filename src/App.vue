@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 20:01:42
+ * @LastEditTime: 2021-12-23 21:41:26
  * @Description: 
 -->
 <template>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import fs from "fs";
 export default {
   data() {
     return {
@@ -26,9 +27,10 @@ export default {
     };
   },
   mounted() {
+    console.log("ThemesArr", THEMEARR, "THEMEFILES", THEMEFILES);
     document
       .getElementsByTagName("body")[0]
-      .setAttribute("data-theme", "theme-default");
+      .setAttribute("data-theme", "default");
   },
 };
 </script>

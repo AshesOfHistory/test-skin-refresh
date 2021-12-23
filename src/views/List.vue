@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 20:42:39
+ * @LastEditTime: 2021-12-23 21:48:17
  * @Description: 
 -->
 <template>
@@ -24,8 +24,8 @@
         @cancel="showPicker = false"
       />
     </van-popup>
-    <!-- https://sitecdn.zcycdn.com/f2e-assets/dc43b39d-4e2e-455e-9a68-ad19ef3da8b8.png?x-oss-process=image/quality,Q_75/format,png -->
-    <!-- :column-num="3" -->
+
+    <div>UI组件</div>
     <van-grid :column-num="columnNum[currentThemeIndex]">
       <van-grid-item
         v-for="value in gridNum[currentThemeIndex]"
@@ -34,6 +34,14 @@
         text="文字"
       />
     </van-grid>
+    <div>自定义HTML样式</div>
+    <div class="grid-wrapper">
+      <div class="grid-item">
+        <div class="grid-icon"></div>
+        <div class="grid-txt"></div>
+      </div>
+    </div>
+
     <div class="container" v-for="(item, index) in 3" :key="index">
       <div class="t-list-title">标题</div>
       <div class="t-list-sub-title">副标题</div>
@@ -69,16 +77,14 @@ export default {
       this.currentThemeIndex = this.themeCName.findIndex(
         (theme) => theme === currentTheme
       );
-      console.log(`theme-${this.themeValue[this.currentThemeIndex]}`);
       document
         .getElementsByTagName("body")[0]
-        .setAttribute(
-          "data-theme",
-          `theme-${this.themeValue[this.currentThemeIndex]}`
-        );
+        .setAttribute("data-theme", THEMEARR[this.currentThemeIndex]);
     },
   },
   mounted() {
+    this.themeCName = THEMEARR;
+    this.currentTheme = this.themeCName[0];
     // 用js模拟scss所做的事情
     const black = "#333";
     const red = "red";
@@ -195,19 +201,6 @@ $blue: blue;
 $orange: orange;
 $purple: purple;
 
-// 不同主题的对应mixin
-@mixin t-list-title-default {
-  color: $info;
-  font-weight: $font-weight-bold;
-  font-size: $font-size-lg;
-}
-
-@mixin t-list-title-old {
-  color: $success;
-  font-weight: $font-weight-bold;
-  font-size: $font-size-slg;
-}
-
 $themes-color: (
   default: (
     // 全局样式属性
@@ -241,7 +234,7 @@ $themes-color: (
 @mixin themify() {
   @each $theme-name, $map in $themes-color {
     // & 表示父级元素  !global 表示覆盖原来的
-    [data-theme="theme-#{$theme-name}"] & {
+    [data-theme="#{$theme-name}"] & {
       $theme-map: () !global;
       // 循环合并键值对
       @each $key, $value in $map {

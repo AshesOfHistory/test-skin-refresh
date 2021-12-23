@@ -2,9 +2,23 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 05:59:05
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-20 06:10:01
+ * @LastEditTime: 2021-12-23 21:34:45
  * @Description:
  */
+
+const fs = require("fs");
+const webpack = require("webpack");
+
+// const themeFiles = fs.readFileSync("");
+const themeFiles = fs.readdirSync("./src/style/theme");
+let ThemesArr = [];
+themeFiles.forEach(function (item, index) {
+  let stat = fs.lstatSync("./src/style/theme/" + item);
+  if (stat.isDirectory() === true) {
+    ThemesArr.push(item);
+  }
+});
+console.log("themeFiles", themeFiles, "ThemesArr", ThemesArr);
 module.exports = {
   css: {
     loaderOptions: {
@@ -13,5 +27,15 @@ module.exports = {
         additionalData: `@import "./src/style/theme/index.scss";`,
       },
     },
+  },
+  configureWebpack: (config) => {
+    return {
+      plugins: [
+        new webpack.DefinePlugin({
+          THEMEARR: JSON.stringify(ThemesArr),
+          THEMEFILES: JSON.stringify(themeFiles),
+        }),
+      ],
+    };
   },
 };
