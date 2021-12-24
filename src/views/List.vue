@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 21:59:07
+ * @LastEditTime: 2021-12-24 13:38:48
  * @Description: 
 -->
 <template>
@@ -19,9 +19,10 @@
     <van-popup v-model="showPicker" position="bottom">
       <van-picker
         show-toolbar
-        :columns="themeCName"
+        :columns="themeValue"
         @confirm="onConfirm"
         @cancel="showPicker = false"
+        :default-index="currentThemeIndex"
       />
     </van-popup>
 
@@ -60,10 +61,10 @@ export default {
   components: {},
   data() {
     return {
-      currentTheme: "默认",
+      currentTheme: "default",
       currentThemeIndex: 0,
-      themeCName: ["默认", "老人", "年轻", "温暖", "寒冷"],
-      themeValue: ["default", "old", "young", "warm", "cold"],
+      // themeCName: ["默认", "老人", "年轻", "温暖", "寒冷"],
+      themeValue: [],
       gridIcon: ["location-o", "like-o", "star-o", "phone-o", "fire-o"],
       gridNum: [8, 4, 8, 8, 6],
       columnNum: [4, 2, 3, 4, 3],
@@ -74,7 +75,7 @@ export default {
     onConfirm(currentTheme) {
       this.currentTheme = currentTheme;
       this.showPicker = false;
-      this.currentThemeIndex = this.themeCName.findIndex(
+      this.currentThemeIndex = this.themeValue.findIndex(
         (theme) => theme === currentTheme
       );
       document
@@ -83,8 +84,11 @@ export default {
     },
   },
   mounted() {
-    this.themeCName = THEMEARR;
-    this.currentTheme = this.themeCName[0];
+    this.themeValue = THEMEARR;
+    this.currentThemeIndex = this.themeValue.findIndex(
+      (theme) => theme === "default"
+    );
+    this.currentTheme = this.themeValue[this.currentThemeIndex];
     // 用js模拟scss所做的事情
     const black = "#333";
     const red = "red";
