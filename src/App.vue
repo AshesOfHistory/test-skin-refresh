@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2022-01-10 04:11:07
+ * @LastEditTime: 2022-01-10 06:52:08
  * @Description: 
 -->
 <template>
@@ -39,9 +39,5 @@ export default {
 #app {
   height: 100%;
   font-size: $font-size;
-  @include set-theme {
-    color: get-color-variable("base-color");
-    background: get-color-variable("background-color");
-  }
 }
 </style>

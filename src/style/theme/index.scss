@@ -1,54 +1,75 @@
 @import "../settings/variable.scss";
 @import "../tools/sassMagic";
 
-@import "./cold/index.scss";
 @import "./default/index.scss";
 @import "./old/index.scss";
-@import "./warm/index.scss";
-@import "./young/index.scss";
 
 $themes: (
   default: $theme-default,
   old: $theme-old,
-  young: $theme-young,
-  warm: $theme-warm,
-  cold: $theme-cold,
 );
 
-@mixin themable {
-  @each $section-theme, $map in $themes {
-    $map: $map !global;
-    [data-theme="#{$section-theme}"] & {
+$theme-map: null;
+
+// 第三步: 定义混合指令, 切换主题,并将主题中的所有规则添加到theme-map中
+@mixin themify() {
+  @each $theme-name, $map in $themes {
+    // & 表示父级元素  !global 表示覆盖原来的
+    [data-theme="#{$theme-name}"] & {
+      $theme-map: () !global;
+      // 循环合并键值对
+      @each $key, $value in $map {
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      // 表示包含 下面函数 themed()
       @content;
     }
   }
 }
 
-@function themed($key, $color) {
-  @return map-get(map-get($map, $key), $color);
+@function themed($key) {
+  @return map-get($theme-map, $key);
 }
 
-@mixin t-list-title($style) {
-  // themed() 被循环调用，每次循环其 $map 值不一样
-  @include themable {
-    #{$style}: themed("t-list-title", "color");
-    #{$style}: themed("t-list-title", "font-weight");
-    #{$style}: themed("t-list-title", "font-size");
-  }
-}
-@mixin t-list-sub-title($style) {
-  // themed() 被循环调用，每次循环其 $map 值不一样
-  @include themable {
-    #{$style}: themed("t-list-sub-title", "color");
-    #{$style}: themed("t-list-sub-title", "font-weight");
-    #{$style}: themed("t-list-sub-title", "font-size");
-  }
-}
-@mixin t-list-info($style) {
-  // themed() 被循环调用，每次循环其 $map 值不一样
-  @include themable {
-    #{$style}: themed("t-list-info", "color");
-    #{$style}: themed("t-list-info", "font-weight");
-    #{$style}: themed("t-list-info", "font-size");
-  }
-}
+// @mixin themable {
+//   @each $section-theme, $map in $themes {
+//     $map: $map !global;
+//     [data-theme="#{$section-theme}"] & {
+//       @content;
+//     }
+//   }
+// }
+
+// @function themed($key, $color) {
+//   @return map-get(map-get($map, $key), $color);
+// }
+
+// @mixin t-list-title($style) {
+//   // themed() 被循环调用，每次循环其 $map 值不一样
+//   @include themable {
+//     #{$style}: themed("t-list-title", "color");
+//     #{$style}: themed("t-list-title", "font-weight");
+//     #{$style}: themed("t-list-title", "font-size");
+//   }
+// }
+// @mixin t-list-sub-title($style) {
+//   // themed() 被循环调用，每次循环其 $map 值不一样
+//   @include themable {
+//     #{$style}: themed("t-list-sub-title", "color");
+//     #{$style}: themed("t-list-sub-title", "font-weight");
+//     #{$style}: themed("t-list-sub-title", "font-size");
+//   }
+// }
+// @mixin t-list-info($style) {
+//   // themed() 被循环调用，每次循环其 $map 值不一样
+//   @include themable {
+//     #{$style}: themed("t-list-info", "color");
+//     #{$style}: themed("t-list-info", "font-weight");
+//     #{$style}: themed("t-list-info", "font-size");
+//   }
+// }
