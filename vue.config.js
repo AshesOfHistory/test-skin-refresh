@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 05:59:05
  * @LastEditors: 沧澜
- * @LastEditTime: 2022-01-10 03:48:13
+ * @LastEditTime: 2022-01-10 05:54:57
  * @Description:
  */
 
@@ -26,9 +26,6 @@ function resolve(dir) {
 }
 
 module.exports = {
-  chainWebpack: (config) => {
-    config.resolve.alias.set("@", resolve("src"));
-  },
   css: {
     loaderOptions: {
       scss: {
