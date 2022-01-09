@@ -2,12 +2,12 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2022-01-10 07:02:44
+ * @LastEditTime: 2022-01-10 07:06:53
  * @Description: 
 -->
 <template>
   <div class="home">
-    <div>这里是首页</div>
+    <div>这里是首页,点击下方选择框切换主题</div>
     <van-field
       readonly
       clickable
@@ -35,17 +35,11 @@
         text="文字"
       />
     </van-grid>
-    <div class="grid-wrapper">
-      <div class="grid-item">
-        <div class="grid-icon"></div>
-        <div class="grid-txt"></div>
-      </div>
-    </div>
 
     <div class="container" v-for="(item, index) in 3" :key="index">
-      <div class="t-list-title">标题</div>
-      <div class="t-list-sub-title">副标题</div>
-      <div class="t-list-info">
+      <div class="t-home-title">标题</div>
+      <div class="t-home-sub-title">副标题</div>
+      <div class="t-home-info">
         这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息这是一段很长的详情信息
       </div>
     </div>
@@ -94,9 +88,9 @@ export default {
 .home {
   padding: 10px;
 
-  .t-list-title,
-  .t-list-sub-title,
-  .t-list-info {
+  .t-home-title,
+  .t-home-sub-title,
+  .t-home-info {
     @include themify() {
       color: themed("color");
       font-weight: themed("font-weight");
