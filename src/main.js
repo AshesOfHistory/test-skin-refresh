@@ -2,7 +2,7 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 04:34:46
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 21:09:05
+ * @LastEditTime: 2022-01-10 04:05:46
  * @Description:
  */
 /*
@@ -18,6 +18,8 @@ import router from "./router";
 import store from "./store";
 import { Tabbar, TabbarItem, Picker, Popup, Field, Grid, GridItem } from "vant";
 import "vant/lib/index.css";
+import "normalize.css/normalize.css";
+import Zooui from "@/components";
 
 Vue.config.productionTip = false;
 Vue.use(Tabbar);
@@ -27,6 +29,9 @@ Vue.use(Popup);
 Vue.use(Field);
 Vue.use(Grid);
 Vue.use(GridItem);
+Vue.use(Zooui);
+// Vue.component("ZRow", Row);
+// Vue.component("ZCol", Col);
 
 new Vue({
   router,

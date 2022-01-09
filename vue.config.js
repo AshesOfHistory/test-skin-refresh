@@ -2,12 +2,13 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 05:59:05
  * @LastEditors: 沧澜
- * @LastEditTime: 2021-12-23 21:52:35
+ * @LastEditTime: 2022-01-10 03:48:13
  * @Description:
  */
 
 const fs = require("fs");
 const webpack = require("webpack");
+const path = require("path");
 
 // 获取主题文件名
 const themeFiles = fs.readdirSync("./src/style/theme");
@@ -18,12 +19,20 @@ themeFiles.forEach(function (item, index) {
     ThemesArr.push(item);
   }
 });
-console.log("themeFiles", themeFiles, "ThemesArr", ThemesArr);
+// console.log("themeFiles", themeFiles, "ThemesArr", ThemesArr);
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
+
 module.exports = {
+  chainWebpack: (config) => {
+    config.resolve.alias.set("@", resolve("src"));
+  },
   css: {
     loaderOptions: {
-      sass: {
-        // 注意这边老版本是prependData，安装新版的sass的时候需要改为additionalData
+      scss: {
+        // 注意: 在sass-loader v8 中，这个选项是prependData
         additionalData: `@import "./src/style/theme/index.scss";`,
       },
     },
