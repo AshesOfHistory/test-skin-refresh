@@ -2,13 +2,12 @@
  * @Author: 沧澜
  * @Date: 2021-12-20 05:59:05
  * @LastEditors: 沧澜
- * @LastEditTime: 2022-01-10 05:54:57
+ * @LastEditTime: 2022-01-10 07:40:32
  * @Description:
  */
 
 const fs = require("fs");
 const webpack = require("webpack");
-const path = require("path");
 
 // 获取主题文件名
 const themeFiles = fs.readdirSync("./src/style/theme");
@@ -19,11 +18,6 @@ themeFiles.forEach(function (item, index) {
     ThemesArr.push(item);
   }
 });
-// console.log("themeFiles", themeFiles, "ThemesArr", ThemesArr);
-
-function resolve(dir) {
-  return path.join(__dirname, dir);
-}
 
 module.exports = {
   css: {
